@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="65d4082b3576484f8e120394cf028c29" Name="Diagram1">
+        <EntityTypeShape EntityType="LandCommitteeModel.CategoryLand" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LandCommitteeModel.categoryOwner" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LandCommitteeModel.ContractOfSale" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LandCommitteeModel.Culculation" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LandCommitteeModel.LandPlot" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LandCommitteeModel.LeaseContract" Width="1.5" PointX="8.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LandCommitteeModel.Owner" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LandCommitteeModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="8.875" IsExpanded="true" />
+        <AssociationConnector Association="LandCommitteeModel.FK_LandPlot_CategoryLand" ManuallyRouted="false" />
+        <AssociationConnector Association="LandCommitteeModel.FK_Owner_categoryOwner" ManuallyRouted="false" />
+        <AssociationConnector Association="LandCommitteeModel.FK_ContractOfSale_Culculation" ManuallyRouted="false" />
+        <AssociationConnector Association="LandCommitteeModel.FK_ContractOfSale_LandPlot" ManuallyRouted="false" />
+        <AssociationConnector Association="LandCommitteeModel.FK_ContractOfSale_Owner" ManuallyRouted="false" />
+        <AssociationConnector Association="LandCommitteeModel.FK_LeaseContract_Culculation" ManuallyRouted="false" />
+        <AssociationConnector Association="LandCommitteeModel.FK_LeaseContract_LandPlot" ManuallyRouted="false" />
+        <AssociationConnector Association="LandCommitteeModel.FK_LeaseContract_Owner" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

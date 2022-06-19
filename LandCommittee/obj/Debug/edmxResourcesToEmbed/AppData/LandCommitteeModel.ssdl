@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище LandCommitteeModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CategoryLand">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="categoryLand" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" />
+    <Property Name="isDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="categoryOwner">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="categoryOwner" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" />
+    <Property Name="isDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContractOfSale">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idLandPlot" Type="int" Nullable="false" />
+    <Property Name="idOwner" Type="int" Nullable="false" />
+    <Property Name="data" Type="date" Nullable="false" />
+    <Property Name="actualUse" Type="nvarchar(max)" />
+    <Property Name="idCalculation" Type="int" Nullable="false" />
+    <Property Name="sumCost" Type="real" Nullable="false" />
+    <Property Name="isDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Culculation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="percentage" Type="real" Nullable="false" />
+    <Property Name="isDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LandPlot">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="square" Type="real" Nullable="false" />
+    <Property Name="builtSquare" Type="real" Nullable="false" />
+    <Property Name="cadastralNumber" Type="nvarchar" MaxLength="17" Nullable="false" />
+    <Property Name="cost" Type="real" Nullable="false" />
+    <Property Name="idCategoryLand" Type="int" Nullable="false" />
+    <Property Name="photo" Type="varbinary(max)" />
+    <Property Name="adress" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="status" Type="bit" Nullable="false" />
+    <Property Name="isDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LeaseContract">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idLandPlot" Type="int" Nullable="false" />
+    <Property Name="idTenat" Type="int" Nullable="false" />
+    <Property Name="startContract" Type="date" Nullable="false" />
+    <Property Name="endContract" Type="date" Nullable="false" />
+    <Property Name="actualUse" Type="nvarchar(max)" />
+    <Property Name="fixing" Type="nvarchar(max)" />
+    <Property Name="idCalculation" Type="int" Nullable="false" />
+    <Property Name="BAP" Type="real" Nullable="false" />
+    <Property Name="sumCost" Type="real" Nullable="false" />
+    <Property Name="isDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Owner">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="surname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="patronomic" Type="nvarchar(max)" />
+    <Property Name="phone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="passport" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="INN" Type="bigint" Nullable="false" />
+    <Property Name="adress" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="idCategory" Type="int" Nullable="false" />
+    <Property Name="isDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_ContractOfSale_Culculation">
+    <End Role="Culculation" Type="Self.Culculation" Multiplicity="1" />
+    <End Role="ContractOfSale" Type="Self.ContractOfSale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Culculation">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ContractOfSale">
+        <PropertyRef Name="idCalculation" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractOfSale_LandPlot">
+    <End Role="LandPlot" Type="Self.LandPlot" Multiplicity="1" />
+    <End Role="ContractOfSale" Type="Self.ContractOfSale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LandPlot">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ContractOfSale">
+        <PropertyRef Name="idLandPlot" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractOfSale_Owner">
+    <End Role="Owner" Type="Self.Owner" Multiplicity="1" />
+    <End Role="ContractOfSale" Type="Self.ContractOfSale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Owner">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ContractOfSale">
+        <PropertyRef Name="idOwner" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LandPlot_CategoryLand">
+    <End Role="CategoryLand" Type="Self.CategoryLand" Multiplicity="1" />
+    <End Role="LandPlot" Type="Self.LandPlot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CategoryLand">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="LandPlot">
+        <PropertyRef Name="idCategoryLand" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LeaseContract_Culculation">
+    <End Role="Culculation" Type="Self.Culculation" Multiplicity="1" />
+    <End Role="LeaseContract" Type="Self.LeaseContract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Culculation">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="LeaseContract">
+        <PropertyRef Name="idCalculation" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LeaseContract_LandPlot">
+    <End Role="LandPlot" Type="Self.LandPlot" Multiplicity="1" />
+    <End Role="LeaseContract" Type="Self.LeaseContract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LandPlot">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="LeaseContract">
+        <PropertyRef Name="idLandPlot" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LeaseContract_Owner">
+    <End Role="Owner" Type="Self.Owner" Multiplicity="1" />
+    <End Role="LeaseContract" Type="Self.LeaseContract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Owner">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="LeaseContract">
+        <PropertyRef Name="idTenat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Owner_categoryOwner">
+    <End Role="categoryOwner" Type="Self.categoryOwner" Multiplicity="1" />
+    <End Role="Owner" Type="Self.Owner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categoryOwner">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Owner">
+        <PropertyRef Name="idCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище LandCommitteeModelContainer">
+    <EntitySet Name="CategoryLand" EntityType="Self.CategoryLand" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="categoryOwner" EntityType="Self.categoryOwner" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContractOfSale" EntityType="Self.ContractOfSale" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Culculation" EntityType="Self.Culculation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LandPlot" EntityType="Self.LandPlot" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LeaseContract" EntityType="Self.LeaseContract" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Owner" EntityType="Self.Owner" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ContractOfSale_Culculation" Association="Self.FK_ContractOfSale_Culculation">
+      <End Role="Culculation" EntitySet="Culculation" />
+      <End Role="ContractOfSale" EntitySet="ContractOfSale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractOfSale_LandPlot" Association="Self.FK_ContractOfSale_LandPlot">
+      <End Role="LandPlot" EntitySet="LandPlot" />
+      <End Role="ContractOfSale" EntitySet="ContractOfSale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractOfSale_Owner" Association="Self.FK_ContractOfSale_Owner">
+      <End Role="Owner" EntitySet="Owner" />
+      <End Role="ContractOfSale" EntitySet="ContractOfSale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LandPlot_CategoryLand" Association="Self.FK_LandPlot_CategoryLand">
+      <End Role="CategoryLand" EntitySet="CategoryLand" />
+      <End Role="LandPlot" EntitySet="LandPlot" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LeaseContract_Culculation" Association="Self.FK_LeaseContract_Culculation">
+      <End Role="Culculation" EntitySet="Culculation" />
+      <End Role="LeaseContract" EntitySet="LeaseContract" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LeaseContract_LandPlot" Association="Self.FK_LeaseContract_LandPlot">
+      <End Role="LandPlot" EntitySet="LandPlot" />
+      <End Role="LeaseContract" EntitySet="LeaseContract" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LeaseContract_Owner" Association="Self.FK_LeaseContract_Owner">
+      <End Role="Owner" EntitySet="Owner" />
+      <End Role="LeaseContract" EntitySet="LeaseContract" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Owner_categoryOwner" Association="Self.FK_Owner_categoryOwner">
+      <End Role="categoryOwner" EntitySet="categoryOwner" />
+      <End Role="Owner" EntitySet="Owner" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
